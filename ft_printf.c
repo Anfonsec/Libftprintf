@@ -6,7 +6,7 @@
 /*   By: anfonsec <anfonsec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:26:00 by anfonsec          #+#    #+#             */
-/*   Updated: 2022/11/30 17:15:36 by anfonsec         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:44:15 by anfonsec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@ static int	f_format(va_list args, const char *str, int *i)
 {
 	int	print_lenght;
 
-	if (args == 'c')
-		print_lenght += ft_printchar (va_arg (args, int *i));
-	else if (args == 's')
+	if (str == 'c')
+		print_lenght += ft_printchar (va_arg (args, int));
+	else if (str == 's')
 		print_lenght += ft_printstr (va_arg (args, str));
-	else if (args == 'p')
+	else if (str == 'p')
 		print_lenght += ft_printpointer (va_arg (args, unsigned long long);
-	else if (args == 'd')
-		print_lenght += ft_print_nbr((args, int));
-	else if (args == 'i')
-		print_lenght += ft_print_unsig((args, int));
-	else if (args == 'u')
-		print_lenght += ft_print_un_nbr((args, int));
-	else if (args == 'x'|| == 'X')
-		print_lenght += ft_print_nbr_hex((args, int));
-	else if (args == '%')
-		print_lenght += ft_print_perc((args, int));
-	
+	else if (str == 'd')
+		print_lenght += ft_print_nbr(va_arg(args, int));
+	else if (str == 'i')
+		print_lenght += ft_print_unsig(va_arg(args, int));
+	else if (str == 'u')
+		print_lenght += ft_print_un_nbr(va_arg(args, int));
+	else if (str == 'x')
+		print_lenght += ft_print_nbr_HEX(va_arg(args, int))
+	else if (str == 'X')
+		print_lenght += ft_print_nbr_hex(va_arg(args, int));
+	else if (str == '%')
+		print_lenght += ft_print_perc(va_arg(args, int));	
 }
 
 int	ft_printf(const char *str, ...)
