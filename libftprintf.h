@@ -6,7 +6,7 @@
 /*   By: anfonsec <anfonsec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 17:57:31 by anfonsec          #+#    #+#             */
-/*   Updated: 2022/11/30 14:53:58 by anfonsec         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:26:49 by anfonsec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # include <unistd.h>
 # include <stddef.h>
 
+int		ft_printf(const char *, ...);
 size_t	ft_strlen(const char *s);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-int		ft_printf(const char *, ...);
+
 
 #endif
 

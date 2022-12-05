@@ -6,34 +6,36 @@
 /*   By: anfonsec <anfonsec@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:26:00 by anfonsec          #+#    #+#             */
-/*   Updated: 2022/11/30 17:44:15 by anfonsec         ###   ########.fr       */
+/*   Updated: 2022/12/05 19:27:42 by anfonsec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "libftprintf.h"
 
-static int	f_format(va_list args, const char *str, int *i)
+static int	f_format(va_list args, const char str)
 {
-	int	print_lenght;
-
+	size_t	print_lenght;
+	
+	print_lenght = 0;
 	if (str == 'c')
-		print_lenght += ft_printchar (va_arg (args, int));
+		print_lenght = ft_printchar((long)va_arg(args, int));
 	else if (str == 's')
-		print_lenght += ft_printstr (va_arg (args, str));
+		print_lenght = ft_printstr(va_arg(args, char *));
 	else if (str == 'p')
-		print_lenght += ft_printpointer (va_arg (args, unsigned long long);
-	else if (str == 'd')
-		print_lenght += ft_print_nbr(va_arg(args, int));
+		print_lenght = ft_printpointer(va_arg (args, long unsigned int);
+	else if (str == 'd'|| str == "i")
+		print_lenght = ft_print_nbr((long)va_arg(args, int));
 	else if (str == 'i')
-		print_lenght += ft_print_unsig(va_arg(args, int));
+		print_lenght = ft_print_nbr((long)va_arg(args, int));
 	else if (str == 'u')
-		print_lenght += ft_print_un_nbr(va_arg(args, int));
+		print_lenght = ft_print_unsigned((long)va_arg(args, unsigned int));
 	else if (str == 'x')
-		print_lenght += ft_print_nbr_HEX(va_arg(args, int))
+		print_lenght = ft_print_nbr_HEX(va_arg(args, unsigned int));
 	else if (str == 'X')
-		print_lenght += ft_print_nbr_hex(va_arg(args, int));
+		print_lenght = ft_print_nbr_hex(va_arg(args, unsigned int));
 	else if (str == '%')
-		print_lenght += ft_print_perc(va_arg(args, int));	
+		print_lenght = write(1, "%%", 1);
+		return(print_lenght);
 }
 
 int	ft_printf(const char *str, ...)
@@ -41,19 +43,19 @@ int	ft_printf(const char *str, ...)
 	int		i;
 	int		j;
 	va_list	args;
+	size_t	total_lenght;
 
 	va_start(args, str);
-	i = 0;
+	i = -1;
 	j = 0;
-	while (str[i] != '\0')
+	tota_lenght = 0;
+	while (str[++i] != '\0')
 	{
-		if (str[i] == '%')
+		if (str[++i] == '%')
 		{
-			if (ft_strchr("cspdiuxX%", str[++i]))
-			{
-				j += f_format(str, &i, args);
-				i++;
-				continue ;
+			i += 1;
+			total_lenght += f_format(args, str[i]);
+			j++;
 			}
 		}
 		ft_putchar_fd(str[i], 1);
@@ -61,23 +63,5 @@ int	ft_printf(const char *str, ...)
 		i++;
 	}
 	va_end(args);
-	return (j);
-	
+	return(total_lenght);
 }
-
-/*char	*ft_strchr(const char *s, int c)
-
-{
-	char	*str;
-
-	str = (char *)s;
-	while (*str != (unsigned char)c)
-	{
-		if (*str == '\0')
-		{
-			return (NULL);
-		}
-		str++;
-	}
-	return (str);
-}*/
